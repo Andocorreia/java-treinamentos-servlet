@@ -12,29 +12,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.alura.gerenciador.servlet.model.Banco;
+
 @WebServlet("/novaEmpresa")
 public class NovaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Banco banco = new Banco();
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		
-		String nomeEmpresa = request.getParameter("nome");
-		banco.adicionaEmpresa(nomeEmpresa);
-	 	      
+		Integer idEmpresa = 0;
+		if(request.getParameter("id") !=null) {
+			idEmpresa = Integer.valueOf(request.getParameter("id"));
+		}
 		
-		out.println("<html>");
-		out.println("<body>");
-		out.println("Empresa "+nomeEmpresa+" cadastrada com sucesso");
-		out.println("</body>");
-		out.println("</html>");
+		String nomeEmpresa = request.getParameter("nome");
+		
+		if(idEmpresa == 0) {
+			
+			banco.adicionaEmpresa(nomeEmpresa);
+			response.sendRedirect("formNovaEmpresa.jsp");
+		} else {
+			banco.alteraEmpresa(idEmpresa, nomeEmpresa);	
+			response.sendRedirect("listaEmpresas.jsp");
+		}
 	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("empresas", banco.getEmpresa());
-		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas.jsp");
-		rd.forward(request,  response);
-	}
-
 }
