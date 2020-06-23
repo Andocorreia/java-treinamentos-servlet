@@ -1,6 +1,5 @@
-package br.com.alura.gerenciador.servlet.model;
+package br.com.alura.gerenciador.model;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,6 +7,15 @@ public class Empresa {
 	private Integer id;
 	private String nome;
 	private LocalDate dataCadastro;
+	private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Integer getId() {
 		return id;
