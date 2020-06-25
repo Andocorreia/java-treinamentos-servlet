@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.model.Banco;
 
-public class NovaEmpresa {
+public class NovaEmpresa implements Acao{
 	private Banco banco = new Banco();
 
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

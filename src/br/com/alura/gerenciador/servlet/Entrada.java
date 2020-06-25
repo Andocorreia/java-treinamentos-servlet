@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.alura.gerenciador.acao.Acao;
 import br.com.alura.gerenciador.acao.AlteraEmpresa;
 import br.com.alura.gerenciador.acao.FormEmpresa;
 import br.com.alura.gerenciador.acao.ListaEmpresas;
@@ -22,23 +23,13 @@ public class Entrada extends HttpServlet {
     
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String parametro = request.getParameter("parametro");
+		String obj = "br.com.alura.gerenciador.acao." + request.getParameter("parametro");
 		String acaoResult = null;
-		if(parametro.contains("ListaEmpresas")) {
-			ListaEmpresas acao = new ListaEmpresas();
+		try {
+			Acao acao = (Acao) Class.forName(obj).newInstance();
 			acaoResult = acao.executa(request, response);
-		}else if(parametro.contains("AlteraEmpresa")) {
-			AlteraEmpresa acao = new AlteraEmpresa();
-			acaoResult = acao.executa(request, response);
-		}else if(parametro.contains("FormEmpresa")) {
-			FormEmpresa acao = new FormEmpresa();
-			acaoResult = acao.executa(request, response);
-		}else if(parametro.contains("NovaEmpresa")) {
-			NovaEmpresa acao = new NovaEmpresa();
-			acaoResult = acao.executa(request, response);
-		}else if(parametro.contains("RemoveEmpresa")) {
-			RemoveEmpresa acao = new RemoveEmpresa();
-			acaoResult = acao.executa(request, response);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			throw new ServletException(e);
 		}
 		
 		String[] tipoRedirecionamento = acaoResult.split(":");		

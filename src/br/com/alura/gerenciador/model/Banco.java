@@ -8,6 +8,7 @@ import java.util.Optional;
 public class Banco {
 
 	private static List<Empresa> empresa = new ArrayList<Empresa>();
+	private static List<Usuario> usuarios = new ArrayList<Usuario>();
 
 	static {
 		Empresa empresa1 = new Empresa();
@@ -23,6 +24,17 @@ public class Banco {
 		empresa2.setNome("Empresa 2");
 		empresa2.setStatus("ATIVO");
 		Banco.empresa.add(empresa2);
+
+		Usuario usuario1 = new Usuario();
+		usuario1.setUsuario("andre");
+		usuario1.setSenha("1234");
+
+		Usuario usuario2 = new Usuario();
+		usuario2.setUsuario("andre");
+		usuario2.setSenha("1234");
+
+		usuarios.add(usuario1);
+		usuarios.add(usuario2);
 
 	}
 
@@ -60,5 +72,18 @@ public class Banco {
 
 	public List<Empresa> getEmpresas() {
 		return Banco.empresa;
+	}
+
+	public boolean login(String usr, String psw) {
+		Usuario usuario = new Usuario();
+		usuario.setUsuario(usr);
+		usuario.setSenha(psw);
+
+		if(Banco.usuarios.stream().filter(user -> user.equals(usuario)).count() > 0) {
+			return true;
+		}
+
+		return false;
+
 	}
 }
