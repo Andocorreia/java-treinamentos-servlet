@@ -36,7 +36,7 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if(usuario.equals(other.getUsuario()) && senha.equals(other.getSenha())) {
+		if(usuario.equals(other.getUsuario())) {
 			return true;
 		}
 		return false;

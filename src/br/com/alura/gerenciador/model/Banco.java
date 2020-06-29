@@ -26,11 +26,11 @@ public class Banco {
 		Banco.empresa.add(empresa2);
 
 		Usuario usuario1 = new Usuario();
-		usuario1.setUsuario("andre");
+		usuario1.setUsuario("Andre");
 		usuario1.setSenha("1234");
 
 		Usuario usuario2 = new Usuario();
-		usuario2.setUsuario("andre");
+		usuario2.setUsuario("Matheus");
 		usuario2.setSenha("1234");
 
 		usuarios.add(usuario1);
@@ -79,11 +79,22 @@ public class Banco {
 		usuario.setUsuario(usr);
 		usuario.setSenha(psw);
 
-		if(Banco.usuarios.stream().filter(user -> user.equals(usuario)).count() > 0) {
+		if (Banco.usuarios.stream().filter(user -> user.equals(usuario)).count() > 0) {
+
 			return true;
 		}
 
 		return false;
+
+	}
+
+	public Usuario getUsuario(String nome) {
+		Optional<Usuario> optionalUsuario = Banco.usuarios.stream().filter(usuario -> nome.equals(usuario.getUsuario()))
+				.findFirst();
+		if (optionalUsuario.isPresent()) {
+			return (Usuario) optionalUsuario.get();
+		}
+		return null;
 
 	}
 }

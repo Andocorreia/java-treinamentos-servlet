@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:url value="/entrada?parametro=RemoveEmpresa" var="linkServletRemoveEmpresa"/>
 <c:url value="/entrada?parametro=AlteraEmpresa" var="linkServletAlteraEmpresa"/>
+<c:url value="/entrada?parametro=Logout" var="linkServletLogout"/>
 <% List<Empresa> empresas = new Banco().getEmpresas();%>
 
 <!DOCTYPE html>
@@ -12,6 +13,11 @@
 <title>Empresas cadastradas</title>
 </head>
 <body>
+	Usuario Nome: ${usuario}
+	<br>
+	<a href="${linkServletLogout}">Logout</a> 
+	<br>
+	
 	<ul>
 	<%for(int i = 0; i < empresas.size(); i++){
 		Empresa empresa = empresas.get(i);
