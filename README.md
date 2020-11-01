@@ -1,2 +1,9 @@
-# java-servlet-fundamentos
-Fundamentos da programação java com Servlet
+# java-treinemantos-servlet
+
+##Stack
+* Java 8
+* Servlet
+* Tomcat
+
+##Banco de Dados
+* N/A
